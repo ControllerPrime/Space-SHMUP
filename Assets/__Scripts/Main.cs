@@ -21,7 +21,7 @@ public class Main : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	public void Update () {
+	public void SpawnEnemy () {
         int ndx = Random.Range(0, prefabEnemies.Length);
         GameObject go = Instantiate<GameObject>(prefabEnemies[ndx]);
 

@@ -38,4 +38,9 @@ public class Hero : MonoBehaviour {
 
         transform.rotation = Quaternion.Euler(yAxis * pitchMult, xAxis * rollMult, 0);
     }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        print("Triggered: " + other.gameObject.name);
+    }
 }

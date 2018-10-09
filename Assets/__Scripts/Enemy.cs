@@ -11,7 +11,7 @@ public class Enemy : MonoBehaviour {
 
     private BoundsCheck bndCheck;
 
-    private void Awake()
+    void Awake()
     {
         bndCheck = GetComponent<BoundsCheck>();
     }
