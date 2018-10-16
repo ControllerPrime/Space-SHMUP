@@ -18,7 +18,7 @@ public class Hero : MonoBehaviour {
     [SerializeField]
     private float _shieldLevel = 1;
 
-    public float shieldLevel = 1;
+    //public float shieldLevel = 1;
 
     private GameObject lastTriggerGo = null;
     // Use this for initialization
@@ -82,7 +82,7 @@ public class Hero : MonoBehaviour {
         }
     }
 
-    public float ShieldLevel
+    public float shieldLevel
     {
         get
         {
