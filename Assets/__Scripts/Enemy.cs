@@ -4,11 +4,13 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour {
     [Header("Set in Inspector: Enemy")]
+    public bool notifiedOfDestruction = false;
     public float speed = 10f;
     public float fireRate = 0.3f;
     public float health = 10;
     public int score = 100;
     public float showDamageDuration = 0.1f;
+    public float powerUpDropChance = 1f;
 
     [Header("Set Dymanically: Enemy")]
     public Color[] originalColors;
@@ -85,6 +87,11 @@ public class Enemy : MonoBehaviour {
                 health -= Main.GetWeaponDefinition(p.type).damageOnHit;
                 if (health <= 0)
                 {
+                    if (!notifiedOfDestruction)
+                    {
+                        Main.S.ShipDestroyed(this);
+                    }
+                    notifiedOfDestruction = true;
                     Destroy(this.gameObject);
                 }
                 Destroy(otherGO);

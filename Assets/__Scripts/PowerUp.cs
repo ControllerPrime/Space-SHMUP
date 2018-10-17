@@ -62,7 +62,7 @@ public class PowerUp : MonoBehaviour
         {
             Color c = cubeRend.material.color;
             c.a = 1f - u;
-            cubeRand.material.color = c;
+            cubeRend.material.color = c;
             c = letter.color;
             c.a = 1f - (u * 0.5f);
             letter.color = c;
