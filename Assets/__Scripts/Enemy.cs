@@ -8,12 +8,26 @@ public class Enemy : MonoBehaviour {
     public float fireRate = 0.3f;
     public float health = 10;
     public int score = 100;
+    public float showDamageDuration = 0.1f;
+
+    [Header("Set Dymanically: Enemy")]
+    public Color[] originalColors;
+    public Material[] materials; 
+    public bool showingDamage = false;
+    public float damageDoneTime; 
+    public bool notifiedOfDesctuction = false; 
 
     protected BoundsCheck bndCheck;
 
     void Awake()
     {
         bndCheck = GetComponent<BoundsCheck>();
+        materials = Utils.GetAllMaterials(gameObject);
+        originalColors = new Color[materials.Length];
+        for (int i = 0; i < materials.Length; i++)
+        {
+            originalColors[i] = materials[i].color;
+        }
     }
 
     public Vector3 pos
@@ -32,7 +46,11 @@ public class Enemy : MonoBehaviour {
 	void Update () {
         Move();
 
-        if (bndCheck != null && bndCheck.offDown)
+        if (showingDamage && Time.time > damageDoneTime)
+        {
+            UnShowDamage();
+        }
+            if (bndCheck != null && bndCheck.offDown)
         {
             Destroy(gameObject);
             if (pos.y < bndCheck.camHeight - bndCheck.radius)
@@ -62,6 +80,8 @@ public class Enemy : MonoBehaviour {
                     break;
                 }
 
+                ShowDamage();
+
                 health -= Main.GetWeaponDefinition(p.type).damageOnHit;
                 if (health <= 0)
                 {
@@ -74,5 +94,24 @@ public class Enemy : MonoBehaviour {
                 print("Enemy hit by non-ProjectileHero: " + otherGO.name);
                 break;
         }
+    }
+
+    void ShowDamage()
+    {
+        foreach (Material m in materials)
+        {
+            m.color = Color.red;
+        }
+        showingDamage = true;
+        damageDoneTime = Time.time + showDamageDuration;
+    }
+
+    void UnShowDamage()
+    {
+        for (int i = 0; i < materials.Length; i++)
+        {
+            materials[i].color = originalColors[i];
+        }
+        showingDamage = false;
     }
 }
