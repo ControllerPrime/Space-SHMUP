@@ -21,7 +21,7 @@ public class Part
     public Material mat;          // The Material to show damage
 }
 
-public class Enemy4 : Enemy
+public class Enemy_4 : Enemy
 {
     // Enemy_4 will start offscreen and then pick a random point on screen to
     //   move to. Once it has arrived, it will pick another random point and
